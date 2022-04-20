@@ -97,7 +97,8 @@ while True:
 
 		print(RankSelect)
 
-		#---Crossover---
+		#---Crossover----
+		
 		CrossoverPoint = random.randint(1,5)
 
 		print("")
