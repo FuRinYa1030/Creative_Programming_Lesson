@@ -1,20 +1,29 @@
 from asyncio.windows_events import NULL
 import math
 import random
+import os
+
+os.system('cls')
 
 p = []
 q = [0,0,0,0]
 per = [0.0,0.0,0.0,0.0]
 RankSelect = [4,4,4,4]
 
+Max_Num = 1048576
+bin_len = len(bin(Max_Num)[2:])
+print(bin_len)
+
+
+
 NoT = 0
 
 #MutationProbability = random.randint(1,100)
-MutationProbability = 20
+MutationProbability = 80
 
 #Initial Population
 for i in range(4):
-	x = random.randint(0,31)
+	x = random.randint(0,Max_Num - 1)
 
 	#binary values encoding
 	x_b = bin(x)[2:]
@@ -29,7 +38,7 @@ for i in range(4):
 def EndCondition(f):
 	for i in f:
 		#Fitness function f(x) Decimal value
-		if int(i,2) >= 31:
+		if int(i,2) >= (Max_Num - 1):
 			return i
 	return NULL
 
@@ -48,15 +57,17 @@ for i in range(0,3):
 #---0 stuffing---
 print("")
 for i in range(4):
-	p[i] = '{0:05d}'.format(int(p[i]))
+	p[i] = '{0:020d}'.format(int(p[i]))
 	print(p[i])
 
 
 while True:
 	solution = EndCondition(p)
-	print(p)
+	
 
 	if solution == NULL:
+		os.system('cls')
+		print(p)
 		NoT += 1
 
 		#---Roulette Wheel Selection Sum---
@@ -76,7 +87,9 @@ while True:
 		
 		
 		print("")
-		print("%of total:",end="")
+		print("Trial:",end="")
+		print(NoT,end="")
+		print(" %of total:",end="")
 		print(per)
 
 		#---Rank select---
@@ -96,7 +109,7 @@ while True:
 
 		#---Crossover----
 		for i in range(0,3,2):
-			CrossoverPoint = random.randint(1,4)
+			CrossoverPoint = random.randint(20 - bin_len,19)
 
 			
 			print("CrossoverPoint:",end="")
@@ -139,8 +152,13 @@ while True:
 			'''		
 
 			if Threshold <= MutationProbability:
-				rand_posi = random.randint(1,5)
-				rand_length = random.randint(1,6 - rand_posi)
+				rand_posi = random.randint(22 - bin_len,20)
+
+				if bin_len >= 17 and rand_posi <= 14:
+					rand_length = random.randint(1,6)
+					
+				else:
+					rand_length = random.randint(1,21 - rand_posi)
 
 				for j in range(rand_length):
 					if q_pro[rand_posi - 1 + j] == "0":
@@ -149,7 +167,10 @@ while True:
 					else:
 						q_pro[rand_posi - 1 + j] = "0"
 
-			q[i] = str(q_pro[0] + q_pro[1] + q_pro[2] + q_pro[3] + q_pro[4])
+			ss = ""
+			for s in q_pro:
+				ss += s
+			q[i] = str(ss)
 
 
 		print("")
@@ -159,9 +180,13 @@ while True:
 		p = q
 		print("-------------------------------------------------")
 
-		break
+		
+
+		#solution = "1111111100"
+		#break
 
 	else:
+		print(p)
 		break
 
 
