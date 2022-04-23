@@ -50,10 +50,12 @@ print("")
 for i in range(4):
 	p[i] = '{0:05d}'.format(int(p[i]))
 	print(p[i])
-
+print("-------------------------------------------------")
+print("")
 
 while True:
 	solution = EndCondition(p)
+	print("root:",end="")
 	print(p)
 
 	if solution == NULL:
@@ -90,15 +92,15 @@ while True:
 					print(Rank)
 					break
 		
-
+		print("select:",end="")
 		print(RankSelect)
-		print("")
+		
 
 		#---Crossover----
 		for i in range(0,3,2):
 			CrossoverPoint = random.randint(1,4)
 
-			
+			print("")
 			print("CrossoverPoint:",end="")
 			print(CrossoverPoint)
 			
@@ -112,16 +114,16 @@ while True:
 			q[i] = C1
 			q[i + 1] = C2
 			
-			'''
+			
 			print("P1:",end="")
-			print(P1)
-			print("P2:",end="")
+			print(P1,end="")
+			print(" P2:",end="")
 			print(P2)
 			print("C1:",end="")
-			print(C1)
-			print("C2:",end="")
+			print(C1,end="")
+			print(" C2:",end="")
 			print(C2)
-			'''
+			
 
 		
 
@@ -153,13 +155,14 @@ while True:
 
 
 		print("")
+		print("solution:",end="")
 		print(q)
 
 
 		p = q
 		print("-------------------------------------------------")
 
-		break
+		
 
 	else:
 		break

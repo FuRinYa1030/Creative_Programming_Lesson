@@ -33,6 +33,11 @@ for i in range(4):
 	print(":",end="")
 	print(x_b)
 
+def clearConsole():
+    command = 'clear'
+    if os.name in ('nt', 'dos'):  # If Machine is running on Windows, use cls
+        command = 'cls'
+    os.system(command)
 
 
 def EndCondition(f):
@@ -66,7 +71,15 @@ while True:
 	
 
 	if solution == NULL:
-		os.system('cls')
+		if NoT % 10 == 0 and NoT != 0:
+
+			clearConsole()
+
+			print("~~~")
+			print("-------------------------------------------------")
+			
+
+		print("root:",end="")
 		print(p)
 		NoT += 1
 
@@ -87,8 +100,6 @@ while True:
 		
 		
 		print("")
-		print("Trial:",end="")
-		print(NoT,end="")
 		print(" %of total:",end="")
 		print(per)
 
@@ -105,13 +116,12 @@ while True:
 		
 
 		print(RankSelect)
-		print("")
 
 		#---Crossover----
 		for i in range(0,3,2):
 			CrossoverPoint = random.randint(20 - bin_len,19)
 
-			
+			print("")
 			print("CrossoverPoint:",end="")
 			print(CrossoverPoint)
 			
@@ -125,18 +135,15 @@ while True:
 			q[i] = C1
 			q[i + 1] = C2
 			
-			'''
+			
 			print("P1:",end="")
-			print(P1)
-			print("P2:",end="")
+			print(P1,end="")
+			print(" P2:",end="")
 			print(P2)
 			print("C1:",end="")
-			print(C1)
-			print("C2:",end="")
+			print(C1,end="")
+			print(" C2:",end="")
 			print(C2)
-			'''
-
-		
 
 		for i in range(4):
 			q_pro = list(q[i])
@@ -174,7 +181,10 @@ while True:
 
 
 		print("")
-		print(q)
+		print("solution:",end="")
+		print(q,end="")
+		print(" Trial:",end="")
+		print(NoT)
 
 
 		p = q
