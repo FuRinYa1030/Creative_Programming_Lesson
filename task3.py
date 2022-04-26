@@ -7,10 +7,10 @@ import time
 
 
 
-N = 100
-R_Num_D = 110
+N = 1024
+R_Num_D = 90
 count = 100
-random_initial_mode = 2
+random_initial_mode = 1
 #set1 N:41 count:50 mode:0 R_Num_D:23
 #set2 N:41 count:50 mode:0 R_Num_D:126
 #set3 N:100 count:100 mode:1 R_Num_D:90
@@ -20,9 +20,9 @@ random_initial_mode = 2
 
 
 
-White_Color = [255,255,255] #RGB - 1
+White_Color = [209,228,228] #RGB - 1
 Black_Color = [50,50,50] #RGB - 0
-mag = 5
+mag = 1
 
 
 
@@ -152,6 +152,7 @@ for k in range(count):
 
     cv2.imshow("Initial",img)
 
+cv2.imwrite("task3.png",img)
 cv2.waitKey(0)
 cv2.destroyAllWindows()
 
