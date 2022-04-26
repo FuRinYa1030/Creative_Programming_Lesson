@@ -5,6 +5,8 @@ import os
 import cv2
 import time
 
+
+
 N = 100
 R_Num_D = 110
 count = 100
@@ -16,11 +18,13 @@ random_initial_mode = 2
 #set5 N:100 count:100 mode:2 R_Num_D:150
 #set6 N:100 count:100 mode:2 R_Num_D:110
 
+
+
 White_Color = [255,255,255] #RGB - 1
 Black_Color = [50,50,50] #RGB - 0
 mag = 5
 
-#90 85 170
+
 
 D = np.zeros(N)
 
@@ -80,6 +84,7 @@ for i in range(N):
     else:
         print("■",end="")
 print("")
+
 
 img = cv2.imread("seed.png")
 img = cv2.resize(img,(N*mag,N*mag))
