@@ -1,23 +1,28 @@
-from audioop import reverse
-from itertools import count
-from posixpath import split
-from re import A, S
 from tkinter import N
 import numpy as np
 import random
 import os
+import cv2
+import time
 
-N = 41
-R_Num_D = 5
-count = 50
+N = 100
+R_Num_D = 110
+count = 100
+random_initial_mode = 2
+#set1 N:41 count:50 mode:0 R_Num_D:23
+#set2 N:41 count:50 mode:0 R_Num_D:126
+#set3 N:100 count:100 mode:1 R_Num_D:90
+#set4 N:100 count:100 mode:1 R_Num_D:170
+#set5 N:100 count:100 mode:2 R_Num_D:150
+#set6 N:100 count:100 mode:2 R_Num_D:110
+
+White_Color = [255,255,255] #RGB - 1
+Black_Color = [50,50,50] #RGB - 0
+mag = 5
 
 #90 85 170
 
 D = np.zeros(N)
-
-
-
-
 
 R_Num_B = bin(R_Num_D)[2:]
 R_Num_B = '{0:08d}'.format(int(R_Num_B))
@@ -51,17 +56,50 @@ def clearConsole():
 
 
 
+if random_initial_mode == 0:
+    for i in range(N):
+        D[i] = random.randint(0,1)
+elif random_initial_mode == 1:
+    #Sierpinski gasket /The center of the array is 1
+    center = int(N / 2)
+    if N % 2 == 0:
+        D[center] = 1
+    else:
+        D[center + 1] = 1
+    count = N
+elif random_initial_mode == 2:
+    D[N - 1] = 1
+
+
+
 print("初期値↓")
 print("   ",end="")
 for i in range(N):
-    D[i] = random.randint(0,1)
-    
     if D[i] == 0:
         print("□",end="")
     else:
         print("■",end="")
 print("")
 
+img = cv2.imread("seed.png")
+img = cv2.resize(img,(N*mag,N*mag))
+
+
+for i in range(N):
+    if D[i] == 0:
+        img[0:mag,i*mag:(i+1)*mag,0] = Black_Color[2]
+        img[0:mag,i*mag:(i+1)*mag,1] = Black_Color[1]
+        img[0:mag,i*mag:(i+1)*mag,2] = Black_Color[0]
+    else:
+        img[0:mag,i*mag:(i+1)*mag,0] = White_Color[2]
+        img[0:mag,i*mag:(i+1)*mag,1] = White_Color[1]
+        img[0:mag,i*mag:(i+1)*mag,2] = White_Color[0]
+
+
+
+cv2.imshow("Initial",img)
+cv2.waitKey(0)
+cv2.destroyAllWindows()
 
 
 for k in range(count):
@@ -97,6 +135,18 @@ for k in range(count):
             print("■",end="")
     print("")
 
+    for i in range(N):
+        if D[i] == 0:
+            img[k*mag:(k+1)*mag,i*mag:(i+1)*mag,0] = Black_Color[2]
+            img[k*mag:(k+1)*mag,i*mag:(i+1)*mag,1] = Black_Color[1]
+            img[k*mag:(k+1)*mag,i*mag:(i+1)*mag,2] = Black_Color[0]
+        else:
+            img[k*mag:(k+1)*mag,i*mag:(i+1)*mag,0] = White_Color[2]
+            img[k*mag:(k+1)*mag,i*mag:(i+1)*mag,1] = White_Color[1]
+            img[k*mag:(k+1)*mag,i*mag:(i+1)*mag,2] = White_Color[0]
 
+    cv2.imshow("Initial",img)
 
+cv2.waitKey(0)
+cv2.destroyAllWindows()
 
