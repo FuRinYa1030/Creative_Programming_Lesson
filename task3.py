@@ -7,10 +7,10 @@ import time
 
 
 
-N = 1024
-R_Num_D = 90
-count = 100
-random_initial_mode = 1
+N = 256
+R_Num_D = 110
+count = 256
+random_initial_mode = 2
 #set1 N:41 count:50 mode:0 R_Num_D:23
 #set2 N:41 count:50 mode:0 R_Num_D:126
 #set3 N:100 count:100 mode:1 R_Num_D:90
@@ -18,11 +18,16 @@ random_initial_mode = 1
 #set5 N:100 count:100 mode:2 R_Num_D:150
 #set6 N:100 count:100 mode:2 R_Num_D:110
 
+print("Ruru:",end=str(R_Num_D))
+print(" Size:",end=str(N))
+print(" Count:",end=str(count))
+print(" Mode:",end=str(0))
+
 
 
 White_Color = [209,228,228] #RGB - 1
 Black_Color = [50,50,50] #RGB - 0
-mag = 1
+mag = 8
 
 
 
@@ -43,7 +48,7 @@ for i in range(0,8):
 
 
 
-print("Ruru:",end=str(R_Num_D))
+
 print("")
 for i in range(8):
     print(R_Num_B_List[i],end=":")
